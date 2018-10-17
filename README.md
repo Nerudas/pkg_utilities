@@ -1,5 +1,5 @@
 # Utilities
-Useful extensions **package** for the site.
+Useful extensions **package** for site.
 
 **[Download last version](https://github.com/Nerudas/pkg_utilities/releases/latest)**   
 
