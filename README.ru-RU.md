@@ -1,4 +1,4 @@
-# Полезности
+# Утилиты
 **Пакет** полезных расширений для сайта
 
 **[Скачать последнюю версию](https://github.com/Nerudas/pkg_utilities/releases/latest)**    
