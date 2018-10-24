@@ -17,7 +17,7 @@ class JFormFieldFolder extends JFormFieldText
 	/**
 	 * The form field type.
 	 *
-	 * @var    string
+	 * @var string
 	 *
 	 * @since 1.0.0
 	 */

@@ -11,13 +11,16 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\CMS\Factory;
+use Joomla\CMS\MVC\Controller\BaseController;
+use Joomla\CMS\Language\Text;
 
 class PlgSystemFieldTypes extends CMSPlugin
 {
 	/**
 	 * Affects constructor behavior. If true, language files will be loaded automatically.
 	 *
-	 * @var    boolean
+	 * @var boolean
 	 *
 	 * @since 1.0.0
 	 */
@@ -38,5 +41,34 @@ class PlgSystemFieldTypes extends CMSPlugin
 		$form->addFieldPath(__DIR__ . '/fields');
 
 		return true;
+	}
+
+	/**
+	 * Run controller tasks
+	 *
+	 * @since 1.0.0
+	 */
+	public function onAjaxFieldTypes()
+	{
+		$app  = Factory::getApplication();
+		$task = $app->input->get('task', '', 'raw');
+		$app->input->set('format', '');
+
+		if (empty($task))
+		{
+			throw new Exception(Text::_('PLG_SYSTEM_FIELDTYPES_ERROR_TASK_NOT_FOUND'), 404);
+		}
+
+		$task = explode('.', $task);
+		$task = (!empty($task[1])) ? $task[1] : $task[0];
+
+		$controller = BaseController::getInstance('FieldTypes', array('base_path' => __DIR__));
+
+		if (!in_array(strtolower($task), $controller->getTasks()))
+		{
+			throw new Exception(Text::_('PLG_SYSTEM_FIELDTYPES_ERROR_TASK_NOT_FOUND'), 404);
+		}
+
+		$controller->execute($task);
 	}
 }
