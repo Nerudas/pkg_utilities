@@ -42,18 +42,30 @@ class JFormFieldFolder extends JFormFieldText
 		$element['class']    = (!empty($element['class'])) ? $element['class'] . ' readonly' : ' readonly';
 		$element['readonly'] = 'true';
 
+		return parent::setup($element, $value, $group);
+	}
+
+	/**
+	 * Method to get the field input markup.
+	 *
+	 * @return  string  The field input markup.
+	 *
+	 * @since 1.0.0
+	 */
+	protected function getInput()
+	{
 		// Set value
-		if (empty($value))
+		if (empty($this->value))
 		{
 			JLoader::register('FieldTypesHelperFolder', JPATH_PLUGINS . '/system/fieldtypes/helpers/folder.php');
 
 			$helper = new FieldTypesHelperFolder();
-			$root   = $element['root'];
+			$root   = $this->element['root'];
 			$pk     = $this->form->getValue('id');
 
-			$value = $helper->getItemFolder($pk, $root);
+			$this->value = $helper->getItemFolder($pk, $root);
 		}
 
-		return parent::setup($element, $value, $group);
+		return parent::getInput();
 	}
 }
