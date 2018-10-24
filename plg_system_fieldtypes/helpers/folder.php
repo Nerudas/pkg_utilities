@@ -18,7 +18,7 @@ class FieldTypesHelperFolder
 	/**
 	 * Create Temporary image folder
 	 *
-	 * @param int    $pk   Item id;
+	 * @param int    $pk   Item id
 	 * @param string $root Simple path to folder (etc images/others)
 	 *
 	 * @return string|bool
@@ -38,7 +38,7 @@ class FieldTypesHelperFolder
 	/**
 	 * Delete item folder
 	 *
-	 * @param int    $pk   Item id;
+	 * @param int    $pk   Item id
 	 * @param string $root Simple path to folder (etc images/others)
 	 *
 	 * @return bool
@@ -115,7 +115,7 @@ class FieldTypesHelperFolder
 	 * Move temporary folder
 	 *
 	 * @param string $temporary Temporary Folder
-	 * @param int    $pk        Item id;
+	 * @param int    $pk        Item id
 	 * @param string $root      Simple path to folder (etc images/others)
 	 *
 	 * @return bool
