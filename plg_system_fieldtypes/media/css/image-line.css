@@ -1,0 +1,82 @@
+/*
+ * @package    System - Field Types Plugin
+ * @version    1.0.0
+ * @author     Nerudas  - nerudas.ru
+ * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
+ * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ * @link       https://nerudas.ru
+ */
+
+[data-input-image-line] .form {
+	display: flex;
+}
+
+[data-input-image-line] .form.disable {
+	opacity: 0.5;
+}
+
+[data-input-image-line] input[type="file"] {
+	display: none;
+}
+
+[data-input-image-line] .form .value {
+	flex: 1;
+	width: auto;
+	min-width: 10px;
+	border-radius: 0;
+	border-left: none;
+}
+
+[data-input-image-line] .form .action {
+	display: inline-block;
+	width: auto;
+	height: 18px;
+	min-width: 16px;
+	padding: 4px 5px;
+	font-size: 13px;
+	font-weight: normal;
+	line-height: 18px;
+	text-align: center;
+	text-shadow: 0 1px 0 #fff;
+	background-color: #eee;
+	border: 1px solid #ccc;
+}
+
+[data-input-image-line] .form .action.preview {
+	position: relative;
+	border-radius: 3px 0 0 3px;
+}
+
+[data-input-image-line] .form .action.preview > i {
+	margin: 0;
+}
+
+[data-input-image-line] .form .action.preview .preview-modal {
+	display: none;
+	position: absolute;
+	left: -2px;
+	bottom: 30px;
+	width: 90px;
+	height: 90px;
+	padding: 5px;
+	justify-content: center;
+	align-items: center;
+	background: rgba(255, 255, 255, 0.9);
+	border: 1px solid #e5e5e5;
+	z-index: 7;
+	box-sizing: border-box;
+}
+
+[data-input-image-line] .form .action.preview:hover .preview-modal {
+	display: flex;
+}
+
+[data-input-image-line] .form .action.select {
+	border-radius: 0;
+	border-left: none;
+	border-right: none;
+}
+
+[data-input-image-line] .form .action.remove {
+	border-radius: 0 3px 3px 0;
+}
