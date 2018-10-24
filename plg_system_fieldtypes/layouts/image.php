@@ -18,9 +18,9 @@ extract($displayData);
 /**
  * Layout variables
  * -----------------
- * @var   string $class  Classes for the input.
- * @var   string $id     DOM id of the field.
- * @var  string  $accept Accept mime types.
+ * @var string $class  Classes for the input.
+ * @var string $id     DOM id of the field.
+ * @var string $accept Accept mime types.
  */
 
 HTMLHelper::_('jquery.framework');

@@ -15,6 +15,14 @@ use Joomla\CMS\Language\Text;
 
 extract($displayData);
 
+/**
+ * Layout variables
+ * -----------------
+ * @var string $class  Classes for the input.
+ * @var string $id     DOM id of the field.
+ * @var string $accept Accept mime types.
+ */
+
 HTMLHelper::_('jquery.framework');
 HTMLHelper::_('stylesheet', 'media/plg_system_fieldtypes/css/image-line.min.css', array('version' => 'auto'));
 HTMLHelper::_('script', 'media/plg_system_fieldtypes/js/image-line.min.js', array('version' => 'auto'));
@@ -29,10 +37,10 @@ HTMLHelper::_('script', 'media/plg_system_fieldtypes/js/image-line.min.js', arra
 			</div>
 		</div>
 		<input type="text" name="<?php echo $name; ?>" id="<?php echo $id; ?>_value" value="<?php echo $value; ?>"
-		       class="value" readonly="readonly">
-		<input id="<?php echo $id; ?>_field" class="file" type="file" accept="image/*"/>
+			   class="value" readonly="readonly">
+		<input id="<?php echo $id; ?>_field" class="file" type="file" accept="<?php echo $accept; ?>"/>
 		<label for="<?php echo $id; ?>_field" class="action select btn hasTooltip"
-		       title="<?php echo Text::_('JLIB_FORM_BUTTON_SELECT'); ?>">
+			   title="<?php echo Text::_('JLIB_FORM_BUTTON_SELECT'); ?>">
 			<?php echo Text::_('JLIB_FORM_BUTTON_SELECT'); ?>
 		</label>
 		<a class="action remove btn icon-remove"></a>
