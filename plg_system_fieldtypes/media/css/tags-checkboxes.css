@@ -1,0 +1,35 @@
+/*
+ * @package    System - Field Types Plugin
+ * @version    1.0.0
+ * @author     Nerudas  - nerudas.ru
+ * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
+ * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ * @link       https://nerudas.ru
+ */
+
+[data-input-tags-checkboxes] {
+	display: block;
+	width: 206px;
+	max-width: 100%;
+	margin: 0 -10px;
+}
+
+[data-input-tags-checkboxes] .level-1 {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+}
+
+[data-input-tags-checkboxes] .level-1 > .item {
+	width: 206px;
+	max-width: 100%;
+	margin: 10px;
+}
+
+[data-input-tags-checkboxes] .level-1 > .item > .tag label {
+	font-weight: bold;
+}
+
+[data-input-tags-checkboxes] ul {
+	list-style: none;
+}
