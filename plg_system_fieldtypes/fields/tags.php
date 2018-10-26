@@ -81,8 +81,6 @@ class JFormFieldTags extends FormField
 	 *
 	 * @return  boolean  True on success.
 	 *
-	 * @see     FormField::setup()
-	 *
 	 * @since 1.0.0
 	 */
 	public function setup(SimpleXMLElement $element, $value, $group = null)
