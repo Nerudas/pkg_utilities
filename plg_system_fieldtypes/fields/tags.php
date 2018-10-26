@@ -97,7 +97,7 @@ class JFormFieldTags extends FormField
 		{
 			$this->sublayout = (!empty($this->element['sublayout'])) ? (string) $this->element['sublayout'] : 'select';
 			$this->includes  = (!empty($this->element['includes'])) ?
-				explode(',', (string) $this->element['sublayout']) : array();
+				explode(',', (string) $this->element['includes']) : array();
 		}
 
 		// Set sublayout
