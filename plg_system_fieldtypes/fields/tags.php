@@ -141,67 +141,75 @@ class JFormFieldTags extends FormField
 	{
 		if (!is_array($this->_tags))
 		{
-			$app       = Factory::getApplication();
-			$user      = Factory::getUser();
-			$published = ($app->isSite() && !$user->authorise('core.manage', 'com_tags')) ? 1 : array(0, 1);
-			$access    = ($app->isSite() && !$user->authorise('core.admin')) ? $user->getAuthorisedViewLevels() : false;
 
-			// Get tags form db
-			$db    = Factory::getDbo();
-			$query = $db->getQuery(true)
-				->select(array('id', 'parent_id', 'lft', 'level', 'title', 'published', 'access'))
-				->from('#__tags')
-				->where($db->quoteName('alias') . ' <> ' . $db->quote('root'))
-				->order($db->escape('lft') . ' ' . $db->escape('asc'));
-
-			// Filter by published state
-			if (is_numeric($published))
+			try
 			{
-				$query->where('published = ' . (int) $published);
-			}
-			elseif (is_array($published))
-			{
-				$published = ArrayHelper::toInteger($published);
-				$published = implode(',', $published);
+				$app       = Factory::getApplication();
+				$user      = Factory::getUser();
+				$published = ($app->isSite() && !$user->authorise('core.manage', 'com_tags')) ? 1 : array(0, 1);
+				$access    = ($app->isSite() && !$user->authorise('core.admin')) ? $user->getAuthorisedViewLevels() : false;
 
-				$query->where('published IN (' . $published . ')');
-			}
+				// Get tags form db
+				$db    = Factory::getDbo();
+				$query = $db->getQuery(true)
+					->select(array('id', 'parent_id', 'lft', 'level', 'title', 'published', 'access'))
+					->from('#__tags')
+					->where($db->quoteName('alias') . ' <> ' . $db->quote('root'))
+					->order($db->escape('lft') . ' ' . $db->escape('asc'));
 
-			$db->setQuery($query);
-			$rows = $db->loadObjectList('id');
-
-			$tags = array();
-			foreach ($rows as $row)
-			{
-				$row->disable = ($access && !in_array($row->access, $access));
-				$row->active  = (in_array($row->id, $this->value));
-
-				// Add tag to array in empty includes
-				if (empty($this->includes))
+				// Filter by published state
+				if (is_numeric($published))
 				{
-					$tags[$row->id] = $row;
-					continue;
+					$query->where('published = ' . (int) $published);
+				}
+				elseif (is_array($published))
+				{
+					$published = ArrayHelper::toInteger($published);
+					$published = implode(',', $published);
+
+					$query->where('published IN (' . $published . ')');
 				}
 
-				// Check includes
-				if (in_array($row->id, $this->includes))
+				$db->setQuery($query);
+				$rows = $db->loadObjectList('id');
+
+				$tags = array();
+				foreach ($rows as $row)
 				{
-					// Add parent to tags in parent_id not in includes
-					$parent_id = $row->parent_id;
-					while ($parent_id > 1 && !in_array($parent_id, $this->includes) && !empty($rows[$parent_id]))
+					$row->disable = ($access && !in_array($row->access, $access));
+					$row->active  = (in_array($row->id, $this->value));
+
+					// Add tag to array in empty includes
+					if (empty($this->includes))
 					{
-						$parent            = $rows[$parent_id];
-						$parent->disable   = true;
-						$parent->active    = (in_array($parent->id, $this->value));
-						$tags[$parent->id] = $parent;
-						$parent_id         = $parent->parent_id;
+						$tags[$row->id] = $row;
+						continue;
 					}
 
-					$tags[$row->id] = $row;
-				}
-			}
+					// Check includes
+					if (in_array($row->id, $this->includes))
+					{
+						// Add parent to tags in parent_id not in includes
+						$parent_id = $row->parent_id;
+						while ($parent_id > 1 && !in_array($parent_id, $this->includes) && !empty($rows[$parent_id]))
+						{
+							$parent            = $rows[$parent_id];
+							$parent->disable   = true;
+							$parent->active    = (in_array($parent->id, $this->value));
+							$tags[$parent->id] = $parent;
+							$parent_id         = $parent->parent_id;
+						}
 
-			$this->_tags = ArrayHelper::sortObjects($tags, 'lft');
+						$tags[$row->id] = $row;
+					}
+				}
+
+				$this->_tags = ArrayHelper::sortObjects($tags, 'lft');
+			}
+			catch (Exception $e)
+			{
+				throw new Exception(Text::_($e->getMessage()), $e->getCode());
+			}
 		}
 
 		return $this->_tags;
