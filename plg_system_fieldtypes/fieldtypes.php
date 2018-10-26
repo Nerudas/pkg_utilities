@@ -38,7 +38,10 @@ class PlgSystemFieldTypes extends CMSPlugin
 	 */
 	public function onContentPrepareForm($form, $data)
 	{
-		$form->addFieldPath(__DIR__ . '/fields');
+		if ($form)
+		{
+			$form->addFieldPath(__DIR__ . '/fields');
+		}
 
 		return true;
 	}
