@@ -21,5 +21,5 @@ $message = "alert(Joomla.JText._('JLIB_HTML_PLEASE_MAKE_A_SELECTION_FROM_THE_LIS
 ?>
 <button onclick="if (document.adminForm.boxchecked.value > 0){jQuery('#batchTagsModal').modal('show'); return true;} else {<?php echo $message; ?>}"
 		data-toggle="modal" class="btn btn-small">
-	<span class="icon-tags" aria-hidden="true"></span><?php echo Text::_('JGLOBAL_FIELD_TAGS_BATCH'); ?>
+	<span class="icon-tags" aria-hidden="true"></span><?php echo Text::_('JGLOBAL_FIELD_TAGS_BATCH_TOOLBAR'); ?>
 </button>
