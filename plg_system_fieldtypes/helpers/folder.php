@@ -62,7 +62,7 @@ class FieldTypesHelperFolder
 			$folder = JPATH_ROOT . '/' . $root;
 		}
 
-		Folder::move(JPATH_ROOT . '/' . $src, JPATH_ROOT . '/' . $dest);
+		Folder::copy(JPATH_ROOT . '/' . $src, JPATH_ROOT . '/' . $dest);
 
 		return $dest;
 	}
