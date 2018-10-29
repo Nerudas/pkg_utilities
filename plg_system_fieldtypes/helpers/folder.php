@@ -16,7 +16,7 @@ use Joomla\CMS\Filesystem\File;
 class FieldTypesHelperFolder
 {
 	/**
-	 * Create Temporary image folder
+	 * Get item folder path
 	 *
 	 * @param int    $pk   Item id
 	 * @param string $root Simple path to folder (etc images/others)
@@ -33,6 +33,38 @@ class FieldTypesHelperFolder
 		}
 
 		return (!empty($pk)) ? $this->checkFolder($root . '/' . $pk) : $this->createTemporaryFolder($root);
+	}
+
+	/**
+	 * Copy item folder to temporary
+	 *
+	 * @param int    $pk   Item id
+	 * @param string $root Simple path to folder (etc images/others)
+	 *
+	 * @return string|bool
+	 *
+	 * @since 1.0.0
+	 */
+	public function copyItemFolder($pk = null, $root = '')
+	{
+		if (empty($root) || empty($pk))
+		{
+			return $root;
+		}
+
+		$src = $this->checkFolder($root . '/' . $pk);
+
+		$dest   = $root . '/tmp_' . uniqid();
+		$folder = JPATH_ROOT . '/' . $dest;
+		while (Folder::exists($folder))
+		{
+			$dest   = $root . '/tmp_' . uniqid();
+			$folder = JPATH_ROOT . '/' . $root;
+		}
+
+		Folder::move(JPATH_ROOT . '/' . $src, JPATH_ROOT . '/' . $dest);
+
+		return $dest;
 	}
 
 	/**
@@ -129,14 +161,14 @@ class FieldTypesHelperFolder
 			return false;
 		}
 
-		$old = JPATH_ROOT . '/' . $temporary;
-		$new = JPATH_ROOT . '/' . $root . '/' . $pk;
+		$src  = JPATH_ROOT . '/' . $temporary;
+		$dest = JPATH_ROOT . '/' . $root . '/' . $pk;
 
-		if (!Folder::exists($old))
+		if (!Folder::exists($src))
 		{
 			return false;
 		}
 
-		return Folder::move($old, $new);
+		return Folder::move($src, $dest);
 	}
 }
