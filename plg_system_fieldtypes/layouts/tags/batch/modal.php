@@ -13,10 +13,11 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\Language\Text;
 
-$task = $displayData['task'];
+$task     = $displayData['task'];
+$includes = (!empty($displayData['includes'])) ? $displayData['includes'] : '';
 
 $form = new Form('batch', array('control' => 'batch'));
-$form->load('<form>	<field name="tag" type="tags" class="span12" sublayout="checkboxes"/></form>');
+$form->load('<form>	<field name="tag" type="tags" class="span12" sublayout="checkboxes" includes="' . $includes . '"/></form>');
 ?>
 <div id="batchTagsModal" tabindex="-1" class="modal hide fade">
 	<div class="modal-header">
