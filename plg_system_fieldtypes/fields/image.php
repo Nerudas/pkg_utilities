@@ -10,10 +10,10 @@
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Form\FormField;
-use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Form\FormField;
 use Joomla\CMS\Router\Route;
+use Joomla\CMS\Uri\Uri;
 
 JLoader::register('FieldTypesHelperImages', JPATH_PLUGINS . '/system/fieldtypes/helpers/images.php');
 

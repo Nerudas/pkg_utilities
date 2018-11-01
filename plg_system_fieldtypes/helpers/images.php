@@ -10,8 +10,8 @@
 
 defined('_JEXEC') or die;
 
-use Joomla\Filesystem\Folder;
 use Joomla\CMS\Filesystem\File;
+use Joomla\Filesystem\Folder;
 
 JLoader::register('FieldTypesHelperFolder', JPATH_PLUGINS . '/system/fieldtypes/helpers/folder.php');
 

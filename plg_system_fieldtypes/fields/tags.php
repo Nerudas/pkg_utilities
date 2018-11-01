@@ -10,8 +10,8 @@
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Form\FormField;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Form\FormField;
 use Joomla\Utilities\ArrayHelper;
 
 class JFormFieldTags extends FormField
